@@ -102,7 +102,7 @@ for tenfile in all_input_files:
 
                 src_dir0="Not_touch_core\\so_nhapdiemchitiet.xls"
                 src_dir="Not_touch_core\\so_nhapdiemchitiet.xlsx"
-                dst_dir="output\\output_so\\so_nhapdiemchitiet_"+lop + "_" + str(now) + ".xlsx"
+                dst_dir="output\\output_so\\so_nhapdiemchitiet_"+ lop + "_" + str(now) + ".xlsx"
                 #df_title = pd.read_excel(src_dir0)
                 #df_title = df_title[:7]
                 #shutil.copy(src_dir,dst_dir)
@@ -114,9 +114,42 @@ for tenfile in all_input_files:
                 #print(df_final)
                 writer = pd.ExcelWriter(dst_dir,engine = "openpyxl", mode = 'w')
                 df.to_excel(writer,sheet_name = 'Sheet1', startrow=7, startcol=0, header=False, index=False)
+
+                #Xu ly tieu de
+                df_upper_title = pd.DataFrame({'Data':['Sở giáo dục và đào tạo','Đơn vị: THPT Đức Hòa']})
+                df_upper_title.to_excel(writer, startcol=0,startrow=0, header=None, index=False)
+                
+                str_school_title = 'NHẬP ĐIỂM CHI TIẾT MÔN LỚP ' + lop
+                df_class = pd.DataFrame({'Data':[str_school_title]})
+                #Dang bi vuong tieu de lop
+                #Style option: 'color': font-weight: bold lua chon de xu ly bold face
+                #df_class.style.set_properties(**{'font-size':'14pt','font-weight': 'bold' ,'align':'center'})
+                
+                #Sap vi tri tieu de 
+                #df_class.to_excel(writer, startcol=0, startrow=3, header=None, index=False)
+
+
+                #df = df.style.set_properties(**{'background-color': 'grey','font-size': '20pt',})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                #Luu du lieu lai
                 writer.save()
                 
-                #Xu ly tieu de
+                
 
 
 
