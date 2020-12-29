@@ -14,6 +14,7 @@ from os.path import isfile, join
 
 
 #Nhap cac thu vien de xu ly file xls
+import numpy as np
 import pandas as pd
 import xlrd
 import xlwt
@@ -116,41 +117,31 @@ for tenfile in all_input_files:
                 df.to_excel(writer,sheet_name = 'Sheet1', startrow=7, startcol=0, header=False, index=False)
 
                 #Xu ly tieu de
-                df_upper_title = pd.DataFrame({'Data':['Sở giáo dục và đào tạo','Đơn vị: THPT Đức Hòa']})
-                df_upper_title.to_excel(writer, startcol=0,startrow=0, header=None, index=False)
-                
-                str_school_title = 'NHẬP ĐIỂM CHI TIẾT MÔN LỚP ' + lop
-                df_class = pd.DataFrame({'Data':[str_school_title]})
+                #df_upper_title = pd.DataFrame({'Data':['Sở giáo dục và đào tạo','Đơn vị: THPT Đức Hòa']})
+                #df_upper_title.to_excel(writer, startcol=0,startrow=0, header=None, index=False)
+                #str_school_title = 'NHẬP ĐIỂM CHI TIẾT MÔN LỚP ' + lop
+
+                #str_school_title = 'NHẬP ĐIỂM CHI TIẾT MÔN LỚP ' + lop
+                #list_sc_title = list([str_school_title]*19)
+                #print(list_sc_title)
+                #df_class = pd.DataFrame([list_sc_title])
+             
                 #Dang bi vuong tieu de lop
                 #Style option: 'color': font-weight: bold lua chon de xu ly bold face
-                #df_class.style.set_properties(**{'font-size':'14pt','font-weight': 'bold' ,'align':'center'})
+                #df_class.style.set_properties(color="yellow")
                 
                 #Sap vi tri tieu de 
-                #df_class.to_excel(writer, startcol=0, startrow=3, header=None, index=False)
-
-
-                #df = df.style.set_properties(**{'background-color': 'grey','font-size': '20pt',})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                #df_class.style.set_properties(**{'font-size':'14pt', 'text-align':'center','font-weight':'bold'}).to_excel(writer, startcol=0, startrow=3, header = None, index=False)
+                
                 #Luu du lieu lai
                 writer.save()
                 
+                #Xu ly tieu de bang openpyxl
+                str_school_title = 'NHẬP ĐIỂM CHI TIẾT MÔN LỚP ' + lop
+                so_title = 'Sở giáo dục và đào tạo'
+                truong_title = 'Đơn vị: THPT Đức Hòa'
                 
-
+                style_header = openpyxl.styles.Font(name='Times New Roman',sz=14,b=True)
 
 
 #Mau xu ly
