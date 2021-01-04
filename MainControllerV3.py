@@ -142,15 +142,18 @@ for tenfile in all_input_files:
                 str_school_title = 'NHẬP ĐIỂM CHI TIẾT MÔN LỚP ' + lop
                 
                 style_header = openpyxl.styles.Font(name='Times New Roman',sz=14,b=True)
+                normalstyle = openpyxl.styles.Font(name='Times New Roman')
 
                 wb = openpyxl.load_workbook(dst_dir)
                 ws = wb.active
 
                 cell_so = ws.cell(row=1,column=1)
                 cell_so.value = 'Sở giáo dục và đào tạo'
+                cell_so.font = normalstyle
                 cell_truong = ws.cell(row=2,column=1)
                 cell_truong.value = 'Đơn vị: THPT Đức Hòa'
-                
+                cell_truong.font = normalstyle
+
 
                 #atest = ws['A8']
                 #print(atest.value)
