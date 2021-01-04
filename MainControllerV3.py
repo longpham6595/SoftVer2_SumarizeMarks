@@ -44,8 +44,8 @@ for item in input_files:
 
 
 #Kiem tra lai danh sach file nhap vao
-#for item in all_input_files:
-#    print(item)
+for item in all_input_files:
+    print(item)
 
 #Tien hanh lay du lieu tu file tong quat de xu ly cho bo
 for tenfile in all_input_files:
@@ -119,20 +119,42 @@ for tenfile in all_input_files:
 
                 font_title = openpyxl.styles.Font(name='Times New Roman',size = 11,bold=True,color= '00FF0000')
                 font_marktitle = openpyxl.styles.Font(name='Times New Roman',size = 11,bold=True)
-                style_title = openpyxl.styles.Alignment(horizontal='center', vertical='center')
+                style_title = openpyxl.styles.Alignment(horizontal='center', vertical='center',wrap_text= True)
+                thin_border = Border(left=Side(style='thin'), right=Side(style='thin'), top=Side(style='thin'), bottom=Side(style='thin'))
+                grey = "DDDDDD"
+                black= "00808080"
                 
-                
 
-                cell_stt = ws.cell(column=1,row=1)
-                cell_stt.value = 'STT'
-                cell_stt.font = font_title
-                ws.merge_cells("A1:A2")
-                cell_stt.alignment = style_title
-                cell_stt.fill =  PatternFill("solid", fgColor="DDDDDD")
-
-
+                def headerDealer(col,row,strmerge,strip,fontchoice,backgroundchoice):
+                    cell_dealing = ws.cell(column=col,row=row)
+                    cell_dealing.value = strip
+                    cell_dealing.font = fontchoice
+                    ws.merge_cells(strmerge)
+                    cell_dealing.alignment = style_title
+                    cell_dealing.fill =  PatternFill("solid", fgColor=backgroundchoice)
 
 
+                headerDealer(1,1,"A1:A2","STT",font_title,grey)
+                headerDealer(2,1,"B1:B2","Mã lớp",font_title,grey)
+                headerDealer(3,1,"C1:C2","Mã học sinh",font_title,grey)
+                headerDealer(4,1,"D1:D2","Họ tên",font_title,grey)
+                headerDealer(5,1,"E1:E2","Ngày sinh",font_title,grey)
+                headerDealer(6,1,"F1:F2","Toán",font_marktitle,black)
+                headerDealer(7,1,"G1:G2","Vật lý",font_marktitle,black)
+                headerDealer(8,1,"H1:H2","Hóa học",font_marktitle,black)
+                headerDealer(9,1,"I1:I2","Sinh học",font_marktitle,black)
+                headerDealer(10,1,"J1:J2","Tin học",font_marktitle,black)
+                headerDealer(11,1,"K1:K2","Ngữ văn",font_marktitle,black)
+                headerDealer(12,1,"L1:L2","Lịch sử",font_marktitle,black)
+                headerDealer(13,1,"M1:M2","Địa lý",font_marktitle,black)
+                headerDealer(14,1,"N1:N2","Ngoại ngữ",font_marktitle,black)
+                headerDealer(15,1,"O1:O2","Công nghệ",font_marktitle,black)
+                headerDealer(16,1,"P1:P2","GD QP-AN",font_marktitle,black)
+                headerDealer(17,1,"Q1:Q2","Thể dục",font_marktitle,black)
+                headerDealer(18,1,"R1:S1","Tự chọn",font_marktitle,black)
+                headerDealer(20,1,"T1:T2","GDCD",font_marktitle,black)
+                headerDealer(21,1,"U1:U2","ĐTB các môn",font_marktitle,black)
+                headerDealer(22,1,"V1:X1","Kết quả xếp loại và DH thi đua",font_marktitle,black)
 
 
 
