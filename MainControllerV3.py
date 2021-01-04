@@ -20,7 +20,7 @@ import xlrd
 import xlwt
 import openpyxl
 from openpyxl import Workbook
-from openpyxl.styles import Alignment
+from openpyxl.styles import Alignment,PatternFill
 
 #Cac thu vien den copy file
 import datetime
@@ -102,23 +102,112 @@ for tenfile in all_input_files:
                 now = str(datetime.datetime.now())[:19]
                 now = now.replace(":","_")
 
-
-                src_dir0="Not_touch_core\\so_nhapdiemchitiet.xls"
-                src_dir="Not_touch_core\\so_nhapdiemchitiet.xlsx"
-                dst_dir="output\\output_so\\so_nhapdiemchitiet_"+ lop + "_" + str(now) + ".xlsx"
-                #df_title = pd.read_excel(src_dir0)
-                #df_title = df_title[:7]
-                #shutil.copy(src_dir,dst_dir)
+                dst_dir="output\\output_bo\\bo_kqht_"+ lop + "_" + str(now) + ".xlsx"
 
                 #Xoa truoc 2 dong dau cua dataframe
                 df = df.iloc[2:]
-                #print(df_title)
-                #df_final = pd.concat([df_title,df])
-                #print(df_final)
-                writer = pd.ExcelWriter(dst_dir,engine = "openpyxl", mode = 'w')
-                df.to_excel(writer,sheet_name = 'Sheet1', startrow=7, startcol=0, header=False, index=False)
 
-                #Xu ly tieu de
+                writer = pd.ExcelWriter(dst_dir,engine = "openpyxl", mode = 'w')
+                df.to_excel(writer,sheet_name = 'Sheet1', startrow=2, startcol=0, header=False, index=False)
+
+                
+                writer.save()
+                
+                #Xu ly tieu de bang openpyxl
+                wb = openpyxl.load_workbook(dst_dir)
+                ws = wb.active
+
+                font_title = openpyxl.styles.Font(name='Times New Roman',size = 11,bold=True,color= '00FF0000')
+                font_marktitle = openpyxl.styles.Font(name='Times New Roman',size = 11,bold=True)
+                style_title = openpyxl.styles.Alignment(horizontal='center', vertical='center')
+                
+                
+
+                cell_stt = ws.cell(column=1,row=1)
+                cell_stt.value = 'STT'
+                cell_stt.font = font_title
+                ws.merge_cells("A1:A2")
+                cell_stt.alignment = style_title
+                cell_stt.fill =  PatternFill("solid", fgColor="DDDDDD")
+
+
+
+
+
+
+
+
+
+                wb.save(dst_dir)
+
+
+
+
+
+
+
+                #atest = ws['A8']
+                #print(atest.value)
+
+                
+
+#Mau xu ly
+#book = xlrd.open_workbook("input\Sodiem_Tonghop_10A1.xls")
+#print("The number of worksheets is {0}".format(book.nsheets))
+#print("Worksheet name(s): {0}".format(book.sheet_names()))
+#sh = book.sheet_by_index(0)
+#print("{0} {1} {2}".format(sh.name, sh.nrows, sh.ncols))
+
+#for rx in range(sh.nrows):
+#    print(sh.row(rx))
+
+
+#Tu lieu xu ly cho file cua so 
+
+  #src_dir0="Not_touch_core\\so_nhapdiemchitiet.xls"
+                #src_dir="Not_touch_core\\so_nhapdiemchitiet.xlsx"
+                #dst_dir="output\\output_so\\so_nhapdiemchitiet_"+ lop + "_" + str(now) + ".xlsx"
+
+#str_school_title = 'NHẬP ĐIỂM CHI TIẾT MÔN LỚP ' + lop
+                
+                #style_header = openpyxl.styles.Font(name='Times New Roman',sz=14,b=True)
+                #style_center = openpyxl.styles.Alignment(horizontal='center', vertical='center')
+                #normalstyle = openpyxl.styles.Font(name='Times New Roman')
+
+                #wb = openpyxl.load_workbook(dst_dir)
+                #ws = wb.active
+
+                #cell_so = ws.cell(row=1,column=1)
+                #cell_so.value = 'Sở giáo dục và đào tạo'
+                #cell_so.font = normalstyle
+                #cell_truong = ws.cell(row=2,column=1)
+                #cell_truong.value = 'Đơn vị: THPT Đức Hòa'
+                #cell_truong.font = normalstyle
+                
+
+                ##Title lop
+                #cell_title = ws.cell(row=4,column=1)
+                #cell_title.value = str_school_title
+                #cell_title.font = style_header
+                #cell_title.alignment = style_center
+                #ws.merge_cells("A4:M4")
+                #wb.save(dst_dir)
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Raw procedures
+
+#Xu ly tieu de
                 #df_upper_title = pd.DataFrame({'Data':['Sở giáo dục và đào tạo','Đơn vị: THPT Đức Hòa']})
                 #df_upper_title.to_excel(writer, startcol=0,startrow=0, header=None, index=False)
                 #str_school_title = 'NHẬP ĐIỂM CHI TIẾT MÔN LỚP ' + lop
@@ -136,36 +225,3 @@ for tenfile in all_input_files:
                 #df_class.style.set_properties(**{'font-size':'14pt', 'text-align':'center','font-weight':'bold'}).to_excel(writer, startcol=0, startrow=3, header = None, index=False)
                 
                 #Luu du lieu lai
-                writer.save()
-                
-                #Xu ly tieu de bang openpyxl
-                str_school_title = 'NHẬP ĐIỂM CHI TIẾT MÔN LỚP ' + lop
-                
-                style_header = openpyxl.styles.Font(name='Times New Roman',sz=14,b=True)
-                normalstyle = openpyxl.styles.Font(name='Times New Roman')
-
-                wb = openpyxl.load_workbook(dst_dir)
-                ws = wb.active
-
-                cell_so = ws.cell(row=1,column=1)
-                cell_so.value = 'Sở giáo dục và đào tạo'
-                cell_so.font = normalstyle
-                cell_truong = ws.cell(row=2,column=1)
-                cell_truong.value = 'Đơn vị: THPT Đức Hòa'
-                cell_truong.font = normalstyle
-
-
-                #atest = ws['A8']
-                #print(atest.value)
-
-                wb.save(dst_dir)
-
-#Mau xu ly
-#book = xlrd.open_workbook("input\Sodiem_Tonghop_10A1.xls")
-#print("The number of worksheets is {0}".format(book.nsheets))
-#print("Worksheet name(s): {0}".format(book.sheet_names()))
-#sh = book.sheet_by_index(0)
-#print("{0} {1} {2}".format(sh.name, sh.nrows, sh.ncols))
-
-#for rx in range(sh.nrows):
-#    print(sh.row(rx))
