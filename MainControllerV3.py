@@ -19,6 +19,8 @@ import pandas as pd
 import xlrd
 import xlwt
 import openpyxl
+from openpyxl import Workbook
+from openpyxl.styles import Alignment
 
 #Cac thu vien den copy file
 import datetime
@@ -138,11 +140,22 @@ for tenfile in all_input_files:
                 
                 #Xu ly tieu de bang openpyxl
                 str_school_title = 'NHẬP ĐIỂM CHI TIẾT MÔN LỚP ' + lop
-                so_title = 'Sở giáo dục và đào tạo'
-                truong_title = 'Đơn vị: THPT Đức Hòa'
                 
                 style_header = openpyxl.styles.Font(name='Times New Roman',sz=14,b=True)
 
+                wb = openpyxl.load_workbook(dst_dir)
+                ws = wb.active
+
+                cell_so = ws.cell(row=1,column=1)
+                cell_so.value = 'Sở giáo dục và đào tạo'
+                cell_truong = ws.cell(row=2,column=1)
+                cell_truong.value = 'Đơn vị: THPT Đức Hòa'
+                
+
+                #atest = ws['A8']
+                #print(atest.value)
+
+                wb.save(dst_dir)
 
 #Mau xu ly
 #book = xlrd.open_workbook("input\Sodiem_Tonghop_10A1.xls")
