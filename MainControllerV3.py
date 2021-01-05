@@ -120,9 +120,11 @@ for tenfile in all_input_files:
                 font_title = openpyxl.styles.Font(name='Times New Roman',size = 11,bold=True,color= '00FF0000')
                 font_marktitle = openpyxl.styles.Font(name='Times New Roman',size = 11,bold=True)
                 style_title = openpyxl.styles.Alignment(horizontal='center', vertical='center',wrap_text= True)
-                thin_border = Border(left=Side(style='thin'), right=Side(style='thin'), top=Side(style='thin'), bottom=Side(style='thin'))
+                
                 grey = "DDDDDD"
                 black= "00808080"
+                
+
                 
 
                 def headerDealer(col,row,strmerge,strip,fontchoice,backgroundchoice):
@@ -132,7 +134,6 @@ for tenfile in all_input_files:
                     ws.merge_cells(strmerge)
                     cell_dealing.alignment = style_title
                     cell_dealing.fill =  PatternFill("solid", fgColor=backgroundchoice)
-
 
                 headerDealer(1,1,"A1:A2","STT",font_title,grey)
                 headerDealer(2,1,"B1:B2","Mã lớp",font_title,grey)
@@ -157,11 +158,59 @@ for tenfile in all_input_files:
                 headerDealer(22,1,"V1:X1","Kết quả xếp loại và DH thi đua",font_marktitle,black)
 
 
+                def withoutmerge_headerDealer(col,row,strip,fontchoice,backgroundchoice):
+                    cell_dealing = ws.cell(column=col,row=row)
+                    cell_dealing.value = strip
+                    cell_dealing.font = fontchoice
+                    cell_dealing.alignment = style_title
+                    cell_dealing.fill =  PatternFill("solid", fgColor=backgroundchoice)
+
+                withoutmerge_headerDealer(18,2,"Ngoại ngữ 2",font_marktitle,black)
+                withoutmerge_headerDealer(19,2,"Nghề phổ thông",font_marktitle,black)
+                withoutmerge_headerDealer(22,2,"Học lực",font_marktitle,black)
+                withoutmerge_headerDealer(23,2,"Hạnh kiểm",font_marktitle,black)
+                withoutmerge_headerDealer(24,2,"Danh hiệu thi đua",font_marktitle,black)
+
+
+                #Dich chuyen phan du lieu dataframe
+                st_range = 'C3:S'+ str(final_row+1)
+                #print(st_range)
+                ws.move_range(st_range,rows=0,cols=3)
+
+                name_range = 'B3:B'+str(final_row+1)
+                ws.move_range(name_range,rows=0,cols=2)
+
+                kqxl_range = 'T3:V'+str(final_row+1)
+                ws.move_range(kqxl_range,rows=0,cols=2)
+
+
+
+
+
+
+
+
+
+                #Dong khung 
+                def __format_ws__(ws, cell_range):
+                    border = Border(left=Side(border_style='thin', color='000000'),
+                        right=Side(border_style='thin', color='000000'),
+                        top=Side(border_style='thin', color='000000'),
+                        bottom=Side(border_style='thin', color='000000'))
+
+                    rows = ws[cell_range]
+                    for row in rows:
+                        for cell in row:
+                            cell.border = border
+
+                cells_range = 'A1:X'+str(final_row+1)
+                __format_ws__(ws,cells_range)
+
 
 
 
                 wb.save(dst_dir)
-
+                
 
 
 
