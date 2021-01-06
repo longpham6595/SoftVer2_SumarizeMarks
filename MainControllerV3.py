@@ -211,24 +211,6 @@ for tenfile in all_input_files:
                     
 
 
-                #st_range = 'C3:S'+ str(final_row+1)
-                #print(st_range)
-                #ws.move_range(st_range,rows=0,cols=3)
-
-                #name_range = 'B3:B'+str(final_row+1)
-                #ws.move_range(name_range,rows=0,cols=2)
-
-                #kqxl_range = 'T3:V'+str(final_row+1)
-                #ws.move_range(kqxl_range,rows=0,cols=2)
-
-                #kqxl_range = 'S3:S'+str(final_row+1)
-                #ws.move_range(kqxl_range,rows=0,cols=2)
-
-
-
-
-
-
                 #Dong khung 
                 def __format_ws__(ws, cell_range):
                     border = Border(left=Side(border_style='thin', color='000000'),
@@ -243,6 +225,32 @@ for tenfile in all_input_files:
 
                 cells_range = 'A1:X'+str(final_row+1)
                 __format_ws__(ws,cells_range)
+
+                #Di kiem tra va lay du lieu cac cot ma lop, ma hoc sinh, ngay thang nam sinh
+                for fls in all_input_files:
+                    if fls.find('kqht') != -1:
+                        #Doc file 
+                        idbook = pd.read_excel(fls,sheet_name = 'Sheet1')
+                        
+                        #Kiem tra lop co thoa man khong?
+                        #print(idbook.loc[1][1])
+                        #print(lop)
+                        #kq = True
+                        #if lop != idbook.loc[1][1]:
+                        #    kq = False
+                        #print(kq)
+
+                        if idbook.loc[1][1] == lop: 
+                            #Xuly lay dataframe nay de duyet
+                            idmf = idbook
+
+                #Da lay duoc du lieu dataframe vao dataframe ten idmf
+
+
+
+
+
+
 
 
 
@@ -334,3 +342,19 @@ for tenfile in all_input_files:
                 #df_class.style.set_properties(**{'font-size':'14pt', 'text-align':'center','font-weight':'bold'}).to_excel(writer, startcol=0, startrow=3, header = None, index=False)
                 
                 #Luu du lieu lai
+
+
+
+#Code cu xu ly di chuyen dong lenh
+#st_range = 'C3:S'+ str(final_row+1)
+                #print(st_range)
+                #ws.move_range(st_range,rows=0,cols=3)
+
+                #name_range = 'B3:B'+str(final_row+1)
+                #ws.move_range(name_range,rows=0,cols=2)
+
+                #kqxl_range = 'T3:V'+str(final_row+1)
+                #ws.move_range(kqxl_range,rows=0,cols=2)
+
+                #kqxl_range = 'S3:S'+str(final_row+1)
+                #ws.move_range(kqxl_range,rows=0,cols=2)
