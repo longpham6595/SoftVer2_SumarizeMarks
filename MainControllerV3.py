@@ -172,19 +172,54 @@ for tenfile in all_input_files:
                 withoutmerge_headerDealer(24,2,"Danh hiệu thi đua",font_marktitle,black)
 
 
+                
+
+
+                #Def dich chuyen du lieu
+                def move_range(startcol,startrow,endcol,endrow,rowmove,colmove):
+                    str_range = startcol+str(startrow)+':'+endcol+str(endrow)
+                    ws.move_range(str_range,rows=rowmove,cols=colmove)
+
                 #Dich chuyen phan du lieu dataframe
-                st_range = 'C3:S'+ str(final_row+1)
+                move_range('C',3,'S',final_row+1,0,3)
+                move_range('B',3,'B',final_row+1,0,2)
+                move_range('T',3,'V',final_row+1,0,2)
+                move_range('S',3,'S',final_row+1,0,2)
+                move_range('O',3,'O',final_row+1,0,5)
+
+
+                #Dat lai cot dtb lay 1 so sau dau phay
+                for row in range(1, final_row+2):
+                    ws["F{}".format(row)].number_format = '#,#0.0'
+                    ws["G{}".format(row)].number_format = '#,#0.0'
+                    ws["H{}".format(row)].number_format = '#,#0.0'
+                    ws["I{}".format(row)].number_format = '#,#0.0'
+                    ws["J{}".format(row)].number_format = '#,#0.0'
+                    ws["K{}".format(row)].number_format = '#,#0.0'
+                    ws["L{}".format(row)].number_format = '#,#0.0'
+                    ws["M{}".format(row)].number_format = '#,#0.0'
+                    ws["N{}".format(row)].number_format = '#,#0.0'
+                    ws["O{}".format(row)].number_format = '#,#0.0'
+                    ws["P{}".format(row)].number_format = '#,#0.0'
+                    ws["R{}".format(row)].number_format = '#,#0.0'
+                    ws["S{}".format(row)].number_format = '#,#0.0'
+                    ws["T{}".format(row)].number_format = '#,#0.0'
+                    ws["U{}".format(row)].number_format = '#,#0.0'
+                    
+
+
+                #st_range = 'C3:S'+ str(final_row+1)
                 #print(st_range)
-                ws.move_range(st_range,rows=0,cols=3)
+                #ws.move_range(st_range,rows=0,cols=3)
 
-                name_range = 'B3:B'+str(final_row+1)
-                ws.move_range(name_range,rows=0,cols=2)
+                #name_range = 'B3:B'+str(final_row+1)
+                #ws.move_range(name_range,rows=0,cols=2)
 
-                kqxl_range = 'T3:V'+str(final_row+1)
-                ws.move_range(kqxl_range,rows=0,cols=2)
+                #kqxl_range = 'T3:V'+str(final_row+1)
+                #ws.move_range(kqxl_range,rows=0,cols=2)
 
-
-
+                #kqxl_range = 'S3:S'+str(final_row+1)
+                #ws.move_range(kqxl_range,rows=0,cols=2)
 
 
 
