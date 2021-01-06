@@ -1,0 +1,5 @@
+File input sử dụng là các file: 
+-> Sodiem_Tonghop_1xxx
+
+-> kqht(x)
+-> so_nhapdiemchitiet(x)

@@ -186,6 +186,9 @@ for tenfile in all_input_files:
                 move_range('T',3,'V',final_row+1,0,2)
                 move_range('S',3,'S',final_row+1,0,2)
                 move_range('O',3,'O',final_row+1,0,5)
+                move_range('P',3,'P',final_row+1,0,-1)
+                move_range('R',3,'R',final_row+1,0,-2)
+
 
 
                 #Dat lai cot dtb lay 1 so sau dau phay
