@@ -1,5 +1,7 @@
 File input sử dụng là các file: 
 -> Sodiem_Tonghop_1xxx
-
 -> kqht(x)
+2 file phía trên phải được upload toàn bộ vào đúng vị trí trong thư mục input để phần mềm load
+
+
 -> so_nhapdiemchitiet(x)

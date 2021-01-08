@@ -255,7 +255,7 @@ for tenfile in all_input_files:
                     cell_dealing = ws.cell(column=input_col,row=input_row)
                     cell_dealing.value = input_data
 
-                #Load dữ liệu lên file
+                #Load du lieu len file
                 for rec_index in range(0,len(listid)):
                     #print(listid[rec_index])
                     write_cell_data(rec_index+3,1,listid[rec_index][0])
@@ -264,7 +264,42 @@ for tenfile in all_input_files:
                     write_cell_data(rec_index+3,5,listid[rec_index][4])
 
                 wb.save(dst_dir)
-                
+                #Da hoan tat xu ly file cua bo giao duc
+
+                #Tien hanh xu ly file xuat cua so giao duc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
