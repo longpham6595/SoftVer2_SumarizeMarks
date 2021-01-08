@@ -247,17 +247,21 @@ for tenfile in all_input_files:
                 #Da lay duoc du lieu dataframe vao dataframe ten idmf
                 #Chuyen dataframe nay sang list de de xuly voi openpyxl
                 listid = idmf.values.tolist()
+                listid = listid[1:]
                 #print(listid)
 
                 #Tao thu tuc kiem tra va push du lieu len file excels
+                def write_cell_data(input_row,input_col,input_data):
+                    cell_dealing = ws.cell(column=input_col,row=input_row)
+                    cell_dealing.value = input_data
 
-
-
-
-
-
-
-
+                #Load dữ liệu lên file
+                for rec_index in range(0,len(listid)):
+                    #print(listid[rec_index])
+                    write_cell_data(rec_index+3,1,listid[rec_index][0])
+                    write_cell_data(rec_index+3,2,listid[rec_index][1])
+                    write_cell_data(rec_index+3,3,listid[rec_index][2])
+                    write_cell_data(rec_index+3,5,listid[rec_index][4])
 
                 wb.save(dst_dir)
                 
