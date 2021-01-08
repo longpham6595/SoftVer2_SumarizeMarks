@@ -245,7 +245,11 @@ for tenfile in all_input_files:
                             idmf = idbook
 
                 #Da lay duoc du lieu dataframe vao dataframe ten idmf
+                #Chuyen dataframe nay sang list de de xuly voi openpyxl
+                listid = idmf.values.tolist()
+                #print(listid)
 
+                #Tao thu tuc kiem tra va push du lieu len file excels
 
 
 
