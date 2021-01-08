@@ -5,3 +5,5 @@ File input sử dụng là các file:
 
 
 -> so_nhapdiemchitiet(x)
+-> so_diem_khoi_1x_mon_x_x
+2 loại file này sẽ phải được upload toàn bộ vào thư mục input để phần mềm lọc và xử lý

@@ -264,12 +264,18 @@ for tenfile in all_input_files:
                     write_cell_data(rec_index+3,5,listid[rec_index][4])
 
                 wb.save(dst_dir)
-                #Da hoan tat xu ly file cua bo giao duc
+#Da hoan tat xu ly file cua bo giao duc
 
-                #Tien hanh xu ly file xuat cua so giao duc
-
-
-
+                
+                
+#Tien hanh xu ly file xuat cua so giao duc
+#Chay file de truy xuat du lieu
+for tenfile in all_input_files:
+    print(tenfile)
+    
+    #Tien hanh nhap file so_nhapdiemchitiet lay du lieu ID HS cua lop 
+    #(GV phai download toan bo cac file nhap diem cua tung lop nay cho vao ds id)
+    #if (tenfile.find('so_nhapdiemchitiet') != -1):
 
 
 
