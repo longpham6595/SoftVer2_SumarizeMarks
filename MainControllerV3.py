@@ -109,7 +109,7 @@ for tenfile in all_input_files:
 
                 writer = pd.ExcelWriter(dst_dir,engine = "openpyxl", mode = 'w')
                 df.to_excel(writer,sheet_name = 'Sheet1', startrow=2, startcol=0, header=False, index=False)
-
+         
                 
                 writer.save()
                 
@@ -271,7 +271,7 @@ for tenfile in all_input_files:
 #Tien hanh xu ly file xuat cua so giao duc
 #Chay file de truy xuat du lieu
 for tenfile in all_input_files:
-    print(tenfile)
+    #print(tenfile)
     
     #Tien hanh nhap file so_nhapdiemchitiet lay du lieu ID HS cua lop 
     #(GV phai download toan bo cac file nhap diem cua tung lop nay cho vao ds id)
@@ -288,15 +288,77 @@ for tenfile in all_input_files:
         
         #Test Permited class_name???
         #print('*'+class_name+'*')
+        #Da hoan tat lay class name 
+
+        #Xu ly thu tuc lay dataframe chuan bi tao file moi
+        df_lop = df_lop[6:]
+        df_lop.drop(df_lop.columns[[6,7,8,9,10,11,12]],inplace = True, axis = 1)
+
+        print(df_lop)
+
+        #Tao list mon
+        tenmon_infiles = ['toan_hoc','tin_hoc','vat_ly','hoa_hoc','sinh_hoc','lich_su','dia_li','ngu_van','ngoai_ngu','gdcd','cong_nghe']
+        tenmon_view = ['TOÁN','TIN HỌC','VẬT LÝ','HÓA HỌC','SINH HỌC','LỊCH SỬ','ĐỊA LÍ','NGỮ VĂN','NGOẠI NGỮ','GIÁO DỤC CÔNG DÂN','CÔNG NGHỆ']
+
+        for mon in range(0,len(tenmon_infiles)):
+            #Tao file name
+            so_op_name = 'so_nhapdiemchitiet_' + class_name + '_mon_' + tenmon_infiles[mon]
+
+            #Cat thoi diem
+            now = str(datetime.datetime.now())[:19]
+            now = now.replace(':','_')
+            now = now.replace('-','_')
+            now = now.replace(' ','_')
+
+            so_op_name = so_op_name + '_' + now + '.xlsx'
+            print(tenfile)
+
+            #Chuan bi file moi va nhap lieu vao file moi
+            dst_so_dir = "output\\output_so\\" + so_op_name
+            print(dst_so_dir)
+
+            writer_so = pd.ExcelWriter(dst_so_dir,engine = "openpyxl", mode = 'w')
+            df_lop.to_excel(writer_so,sheet_name = 'Sheet1', startrow=7, startcol=0, header=False, index=False)
+
+            writer_so.close()
+            
+            #Tien hanh mo lai file va xu ly
+            wb_so = openpyxl.load_workbook(filename=dst_so_dir)
+            ws_so = wb_so.active
+            
+            #Font va cac tag xu ly tieu de
+            font_title = openpyxl.styles.Font(name='Times New Roman',size = 11,bold=True,color= '00FF0000')
+            font_marktitle = openpyxl.styles.Font(name='Times New Roman',size = 11,bold=True)
+            style_title = openpyxl.styles.Alignment(horizontal='center', vertical='center',wrap_text= True)
+                
+            grey = "DDDDDD"
+            black= "00808080"
+
+
+            def headerDealer(col,row,strmerge,strip,fontchoice,backgroundchoice):
+                cell_dealing = ws_so.cell(column=col,row=row)
+                cell_dealing.value = strip
+                cell_dealing.font = fontchoice
+                ws.merge_cells(strmerge)
+                cell_dealing.alignment = style_title
+                cell_dealing.fill =  PatternFill("solid", fgColor=backgroundchoice)
+
+            so_cell = ws_so.cell(column=1,row=1)
+            so_cell.value = 'Sở giáo dục và đào tạo'
+            truong_cell = ws_so.cell(column=1,row=2)
+            truong_cell.value = 'Đơn vị: THPT Đức Hòa'
+
+            #Hoan tat load Tieu de truong & so 
+
+            #Load du lieu diem
+
+            #Build he thong tieu de trang
+            
 
 
 
 
-
-
-
-
-
+            wb_so.save(dst_so_dir)
 
 
 
