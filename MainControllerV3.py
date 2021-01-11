@@ -275,9 +275,19 @@ for tenfile in all_input_files:
     
     #Tien hanh nhap file so_nhapdiemchitiet lay du lieu ID HS cua lop 
     #(GV phai download toan bo cac file nhap diem cua tung lop nay cho vao ds id)
-    #if (tenfile.find('so_nhapdiemchitiet') != -1):
-
-
+    if (tenfile.find('so_nhapdiemchitiet') != -1):
+        #Load workbook & Check title
+        so_bk = xlrd.open_workbook(tenfile)
+        df_lop = pd.read_excel(so_bk,sheet_name= 'Sheet1')
+        
+        #Iterate Title & Take Class name
+        #print(df_lop.iat[2,0])
+        raw_class_name = df_lop.iat[2,0]
+        class_name_sp = raw_class_name.split('-')
+        class_name = class_name_sp[1][1:-1]
+        
+        #Test Permited class_name???
+        #print('*'+class_name+'*')
 
 
 
