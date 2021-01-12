@@ -275,7 +275,7 @@ for tenfile in all_input_files:
     
     #Tien hanh nhap file so_nhapdiemchitiet lay du lieu ID HS cua lop 
     #(GV phai download toan bo cac file nhap diem cua tung lop nay cho vao ds id)
-    if (tenfile.find('so_nhapdiemchitiet') != -1):
+    if (tenfile.find('Nhap diem chi tiet mon hoc') != -1):
         #Load workbook & Check title
         so_bk = xlrd.open_workbook(tenfile)
         df_lop = pd.read_excel(so_bk,sheet_name= 'Sheet1')
@@ -351,25 +351,39 @@ for tenfile in all_input_files:
             #Hoan tat load Tieu de truong & so 
 
             #Load du lieu diem
-            khoilop = lop[:2]
+            khoilop = class_name[:2]
             print(khoilop)
             for mark_file_search in all_input_files:
                 if ((mark_file_search.find(tenmon_infiles[mon]) != -1) and (mark_file_search.find(str(khoilop)) != -1)):
                     #Doc file chua diem mon cua lop 
-                    sheet_takepoint = tenmon_infiles[mon]+'_'+lop.lower()
+                    sheet_takepoint = tenmon_infiles[mon]+'_'+class_name.lower()
                     df_pts_class = pd.read_excel(mark_file_search,sheet_name=sheet_takepoint)
                     #print(df_pts_class)
-
+                    print(sheet_takepoint)
                     pts_of_class = df_pts_class.values.tolist()
-                    pts_of_class = pts_of_class[:-7]
+                    pts_of_class = pts_of_class[4:-7]
                     print(pts_of_class)
-                    
                     #Hoan thanh load du lieu xuong
 
             #Load du lieu len file
             def write_pts_data(iprow,ipcol,ipdata):
                 ws_so.cell(row=iprow, column=ipcol).value = ipdata
 
+            for row_data in range(2,len(pts_of_class)):
+                if pts_of_class[1][4] == 'TX1':
+                    write_pts_data(row_data,7,pts_of_class[row_data][4])
+                    print(pts_of_class[1][4])
+                    print(pts_of_class[row_data][4])
+                if pts_of_class[1][4] == 'TX2':
+                    write_pts_data(row_data,8,pts_of_class[row_data][5])
+                    print(pts_of_class[1][5])
+                    print(pts_of_class[row_data][5])
+
+                #print(str(row_data)+ '_5_' + str(pts_of_class[row_data][5]))
+                #print(str(row_data)+ '_6_' + str(pts_of_class[row_data][6]))
+                #print(str(row_data)+ '_7_' + str(pts_of_class[row_data][7]))
+
+                write_pts_data(row_data+6,7,pts_of_class[row_data][5])
 
 
 

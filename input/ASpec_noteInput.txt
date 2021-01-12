@@ -4,6 +4,6 @@ File input sử dụng là các file:
 2 file phía trên phải được upload toàn bộ vào đúng vị trí trong thư mục input để phần mềm load
 
 
--> so_nhapdiemchitiet(x)
--> so_diem_khoi_1x_mon_x_x
+-> Nhap diem chi tiet mon XXXX -> Load một môn duy nhất của lớp ở dạng file này để lấy mã
+-> so_diem_khoi_1x_mon_x_x -> Load toàn bộ dữ liệu file này để trả dữ liệu
 2 loại file này sẽ phải được upload toàn bộ vào thư mục input để phần mềm lọc và xử lý
