@@ -294,7 +294,7 @@ for tenfile in all_input_files:
         df_lop = df_lop[6:]
         df_lop.drop(df_lop.columns[[6,7,8,9,10,11,12]],inplace = True, axis = 1)
 
-        print(df_lop)
+        #print(df_lop)
 
         #Tao list mon
         tenmon_infiles = ['toan_hoc','tin_hoc','vat_ly','hoa_hoc','sinh_hoc','lich_su','dia_li','ngu_van','ngoai_ngu','gdcd','cong_nghe']
@@ -351,10 +351,34 @@ for tenfile in all_input_files:
             #Hoan tat load Tieu de truong & so 
 
             #Load du lieu diem
+            khoilop = lop[:2]
+            print(khoilop)
+            for mark_file_search in all_input_files:
+                if ((mark_file_search.find(tenmon_infiles[mon]) != -1) and (mark_file_search.find(str(khoilop)) != -1)):
+                    #Doc file chua diem mon cua lop 
+                    sheet_takepoint = tenmon_infiles[mon]+'_'+lop.lower()
+                    df_pts_class = pd.read_excel(mark_file_search,sheet_name=sheet_takepoint)
+                    #print(df_pts_class)
+
+                    pts_of_class = df_pts_class.values.tolist()
+                    pts_of_class = pts_of_class[:-7]
+                    print(pts_of_class)
+                    
+                    #Hoan thanh load du lieu xuong
+
+            #Load du lieu len file
+            def write_pts_data(iprow,ipcol,ipdata):
+                ws_so.cell(row=iprow, column=ipcol).value = ipdata
+
+
+
+
 
             #Build he thong tieu de trang
             
+            
 
+            
 
 
 
