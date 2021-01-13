@@ -370,20 +370,40 @@ for tenfile in all_input_files:
                 ws_so.cell(row=iprow, column=ipcol).value = ipdata
 
             for row_data in range(2,len(pts_of_class)):
+                ws_so.cell(row=row_data+6,column=5).number_format = 'dd/mm/yyyy'
+
                 if pts_of_class[1][4] == 'TX1':
-                    write_pts_data(row_data,7,pts_of_class[row_data][4])
-                    print(pts_of_class[1][4])
-                    print(pts_of_class[row_data][4])
-                if pts_of_class[1][4] == 'TX2':
-                    write_pts_data(row_data,8,pts_of_class[row_data][5])
-                    print(pts_of_class[1][5])
-                    print(pts_of_class[row_data][5])
+                    write_pts_data(row_data+6,7,pts_of_class[row_data][4])
+                    #print(pts_of_class[row_data][4])
+
+                if pts_of_class[1][5] == 'TX2':
+                    write_pts_data(row_data+6,8,pts_of_class[row_data][5])
+                    #print(pts_of_class[row_data][5])
+
+                if pts_of_class[1][6] == 'TX3':
+                    write_pts_data(row_data+6,9,pts_of_class[row_data][6])
+                    #print(pts_of_class[1][6])
+                    #print(pts_of_class[row_data][6])
+
+                if pts_of_class[1][7] == 'TX4':
+                    write_pts_data(row_data+6,10,pts_of_class[row_data][7])
+                    #print(pts_of_class[1][7])
+                    #print(pts_of_class[row_data][7])
+
+
+
+
+
+
+
 
                 #print(str(row_data)+ '_5_' + str(pts_of_class[row_data][5]))
                 #print(str(row_data)+ '_6_' + str(pts_of_class[row_data][6]))
                 #print(str(row_data)+ '_7_' + str(pts_of_class[row_data][7]))
-
-                write_pts_data(row_data+6,7,pts_of_class[row_data][5])
+                
+                #print('*'+pts_of_class[1][4]+'*')
+                #print('*'+pts_of_class[1][5]+'*')
+                #write_pts_data(row_data+6,7,pts_of_class[row_data][5])
 
 
 
