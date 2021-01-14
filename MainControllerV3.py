@@ -365,35 +365,69 @@ for tenfile in all_input_files:
                     print(pts_of_class)
                     #Hoan thanh load du lieu xuong
 
+
+            for row in range(7, len(pts_of_class)+7):
+                ws_so["G{}".format(row)].number_format = '#,#0.0'
+                ws_so["H{}".format(row)].number_format = '#,#0.0'
+                ws_so["I{}".format(row)].number_format = '#,#0.0'
+                ws_so["J{}".format(row)].number_format = '#,#0.0'
+                ws_so["K{}".format(row)].number_format = '#,#0.0'
+                ws_so["L{}".format(row)].number_format = '#,#0.0'
+                ws_so["M{}".format(row)].number_format = '#,#0.0'
+                    
+
             #Load du lieu len file
             def write_pts_data(iprow,ipcol,ipdata):
                 ws_so.cell(row=iprow, column=ipcol).value = ipdata
+                
 
             for row_data in range(2,len(pts_of_class)):
                 ws_so.cell(row=row_data+6,column=5).number_format = 'dd/mm/yyyy'
 
+                check_point_1 = False
+                check_point_2 = False
+                check_point_3 = False
+                check_point_4 = False
+
+
                 if pts_of_class[1][4] == 'TX1':
                     write_pts_data(row_data+6,7,pts_of_class[row_data][4])
+                    check_point_1 = True
                     #print(pts_of_class[row_data][4])
 
                 if pts_of_class[1][5] == 'TX2':
                     write_pts_data(row_data+6,8,pts_of_class[row_data][5])
+                    check_point_2 = True
                     #print(pts_of_class[row_data][5])
 
                 if pts_of_class[1][6] == 'TX3':
                     write_pts_data(row_data+6,9,pts_of_class[row_data][6])
+                    check_point_3 = True
                     #print(pts_of_class[1][6])
                     #print(pts_of_class[row_data][6])
 
                 if pts_of_class[1][7] == 'TX4':
                     write_pts_data(row_data+6,10,pts_of_class[row_data][7])
+                    check_point_4 = True
                     #print(pts_of_class[1][7])
                     #print(pts_of_class[row_data][7])
 
+                index_gk = pts_of_class[0].index('Giữa Kỳ')
+                #print(index_gk)
+                input_col = 7
+                if check_point_1:
+                    input_col += 1 
+                if check_point_2:
+                    input_col += 1 
+                if check_point_3:
+                    input_col += 1 
+                if check_point_4:
+                    input_col += 1 
 
 
-
-
+                write_pts_data(row_data+6,11,pts_of_class[row_data][index_gk])
+                write_pts_data(row_data+6,12,pts_of_class[row_data][index_gk+1])
+                write_pts_data(row_data+6,13,pts_of_class[row_data][index_gk+2])
 
 
 
