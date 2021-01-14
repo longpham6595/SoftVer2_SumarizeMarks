@@ -326,23 +326,6 @@ for tenfile in all_input_files:
             wb_so = openpyxl.load_workbook(filename=dst_so_dir)
             ws_so = wb_so.active
             
-            #Font va cac tag xu ly tieu de
-            font_title = openpyxl.styles.Font(name='Times New Roman',size = 11,bold=True,color= '00FF0000')
-            font_marktitle = openpyxl.styles.Font(name='Times New Roman',size = 11,bold=True)
-            style_title = openpyxl.styles.Alignment(horizontal='center', vertical='center',wrap_text= True)
-                
-            grey = "DDDDDD"
-            black= "00808080"
-
-
-            def headerDealer(col,row,strmerge,strip,fontchoice,backgroundchoice):
-                cell_dealing = ws_so.cell(column=col,row=row)
-                cell_dealing.value = strip
-                cell_dealing.font = fontchoice
-                ws.merge_cells(strmerge)
-                cell_dealing.alignment = style_title
-                cell_dealing.fill =  PatternFill("solid", fgColor=backgroundchoice)
-
             so_cell = ws_so.cell(column=1,row=1)
             so_cell.value = 'Sở giáo dục và đào tạo'
             truong_cell = ws_so.cell(column=1,row=2)
@@ -443,11 +426,54 @@ for tenfile in all_input_files:
 
 
             #Build he thong tieu de trang
-            
-            
+            def headerDealer_nobackground(col,row,strmerge,strip,fontchoice):
+                    cell_dealing = ws_so.cell(column=col,row=row)
+                    cell_dealing.value = strip
+                    cell_dealing.font = fontchoice
+                    ws_so.merge_cells(strmerge)
+                    cell_dealing.alignment = style_title
 
-            
+            alice_blue = "10edef"
+            light_yellow = "ebfb76"
+            def headerDealer_so(col,row,strmerge,strip,fontchoice,backgroundchoice):
+                    cell_dealing = ws_so.cell(column=col,row=row)
+                    cell_dealing.value = strip
+                    cell_dealing.font = fontchoice
+                    ws_so.merge_cells(strmerge)
+                    cell_dealing.alignment = style_title
+                    cell_dealing.fill =  PatternFill("solid", fgColor=backgroundchoice)
 
+
+            def headerDealer_withoutmerge_so(col,row,strip,fontchoice,backgroundchoice):
+                    cell_dealing = ws_so.cell(column=col,row=row)
+                    cell_dealing.value = strip
+                    cell_dealing.font = fontchoice
+                    cell_dealing.alignment = style_title
+                    cell_dealing.fill =  PatternFill("solid", fgColor=backgroundchoice)
+
+            def headerDealer_withoutmerge_withoutcolor_so(col,row,strip,fontchoice):
+                    cell_dealing = ws_so.cell(column=col,row=row)
+                    cell_dealing.value = strip
+                    cell_dealing.font = fontchoice
+                    cell_dealing.alignment = style_title
+                    
+
+
+            headerDealer_nobackground(1,6,'A6:A7','STTHS',font_marktitle)
+            headerDealer_nobackground(2,6,'B6:B7','Mã học sinh',font_marktitle)
+            headerDealer_nobackground(3,6,'C6:C7','Họ đệm',font_marktitle)
+            headerDealer_nobackground(4,6,'D6:D7','Tên',font_marktitle)
+            headerDealer_nobackground(5,6,'E6:E7','Ngày sinh',font_marktitle)
+            headerDealer_nobackground(6,6,'F6:F7','Trạng thái học',font_marktitle)
+            headerDealer_so(7,6,'G6:J6','Điểm kiểm tra thường xuyên',font_marktitle,alice_blue)
+            headerDealer_withoutmerge_withoutcolor_so(7,7,'KTTX1',font_marktitle)
+            headerDealer_withoutmerge_withoutcolor_so(8,7,'KTTX2',font_marktitle)
+            headerDealer_withoutmerge_withoutcolor_so(9,7,'KTTX3',font_marktitle)
+            headerDealer_withoutmerge_withoutcolor_so(10,7,'KTTX4',font_marktitle)
+            headerDealer_withoutmerge_withoutcolor_so(11,7,'KTGK',font_marktitle)
+            headerDealer_withoutmerge_so(11,6,'Điểm kiểm tra giữa kỳ',font_marktitle,light_yellow)
+            headerDealer_so(12,6,'L6:L7','Điểm KT HK',font_marktitle,light_yellow)
+            headerDealer_nobackground(13,6,'M6:M7','Điểm TB',font_marktitle)
 
 
             wb_so.save(dst_so_dir)
