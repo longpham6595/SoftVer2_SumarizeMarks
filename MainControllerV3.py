@@ -13,7 +13,7 @@ from os import listdir
 from os.path import isfile, join
 
 
-#Nhap cac thu vien de xu ly file xls
+#Nhap cac thu vien de xu ly file xls,xlsx
 import numpy as np
 import pandas as pd
 import xlrd
@@ -21,11 +21,12 @@ import xlwt
 import openpyxl
 from openpyxl import Workbook
 from openpyxl.styles import Alignment,PatternFill
+import xlsxwriter
+import pyexcel
 
 #Cac thu vien den copy file
 import datetime
 import shutil
-import xlsxwriter
 
 
 
@@ -476,9 +477,37 @@ for tenfile in all_input_files:
             headerDealer_nobackground(13,6,'M6:M7','Điểm TB',font_marktitle)
 
 
+            #Dong khung 
+            def __format_ws_so__(ws, cell_range):
+                border = Border(left=Side(border_style='thin', color='000000'),
+                                right=Side(border_style='thin', color='000000'),
+                                top=Side(border_style='thin', color='000000'),
+                                bottom=Side(border_style='thin', color='000000'))
+
+                rows = ws_so[cell_range]
+                for row in rows:
+                    for cell in row:
+                        cell.border = border
+
+            cells_range = 'A6:M'+str(len(pts_of_class)+5)
+            __format_ws_so__(ws_so,cells_range)
+
+            #Tao tieu de file 
+            title_file = 'NHẬP ĐIỂM CHI TIẾT MÔN HỌC - ' + class_name.upper() + '_' + tenmon_view[mon]
+            headerDealer_nobackground(1,4,'A4:M4',title_file,font_marktitle)
+
             wb_so.save(dst_so_dir)
 
+            #print(dst_so_dir)
+            xls_dest = dst_so_dir.split('\\')
+            xls_dest[1] = 'output_so_xls'
+            xls_dest[2] = xls_dest[2][:-1]
+            #print(xls_dest)
 
+            new_dest_so = xls_dest[0] + '\\' + xls_dest[1] + '\\' + xls_dest[2]
+            #print(new_dest_so)
+            
+            pyexcel.save_book_as(file_name = dst_so_dir,dest_file_name = new_dest_so)
 
 
 
