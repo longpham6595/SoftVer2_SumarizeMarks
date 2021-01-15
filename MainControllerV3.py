@@ -23,6 +23,11 @@ from openpyxl import Workbook
 from openpyxl.styles import Alignment,PatternFill
 import xlsxwriter
 import pyexcel
+import pyexcel_io
+
+
+
+
 
 #Cac thu vien den copy file
 import datetime
@@ -47,6 +52,9 @@ for item in input_files:
 #Kiem tra lai danh sach file nhap vao
 for item in all_input_files:
     print(item)
+
+
+
 
 #Tien hanh lay du lieu tu file tong quat de xu ly cho bo
 for tenfile in all_input_files:
@@ -182,13 +190,30 @@ for tenfile in all_input_files:
                     ws.move_range(str_range,rows=rowmove,cols=colmove)
 
                 #Dich chuyen phan du lieu dataframe
-                move_range('C',3,'S',final_row+1,0,3)
-                move_range('B',3,'B',final_row+1,0,2)
-                move_range('T',3,'V',final_row+1,0,2)
-                move_range('S',3,'S',final_row+1,0,2)
-                move_range('O',3,'O',final_row+1,0,5)
-                move_range('P',3,'P',final_row+1,0,-1)
-                move_range('R',3,'R',final_row+1,0,-2)
+                if lop.find('10') != -1:
+                    move_range('C',3,'S',final_row+1,0,3)
+                    move_range('B',3,'B',final_row+1,0,2)
+                    move_range('T',3,'V',final_row+1,0,2)
+                    move_range('S',3,'S',final_row+1,0,2)
+                    move_range('O',3,'O',final_row+1,0,5)
+                    move_range('P',3,'P',final_row+1,0,-1)
+                    move_range('R',3,'R',final_row+1,0,-2)
+                if lop.find('12') != -1:
+                    move_range('C',3,'S',final_row+1,0,3)
+                    move_range('B',3,'B',final_row+1,0,2)
+                    #move_range('T',3,'V',final_row+1,0,2)
+                    #move_range('S',3,'S',final_row+1,0,2)
+                    #move_range('O',3,'O',final_row+1,0,5)
+                    #move_range('P',3,'P',final_row+1,0,-1)
+                    #move_range('R',3,'R',final_row+1,0,-2)
+                if lop.find('11') !=1: 
+                    move_range('C',3,'T',final_row+1,0,3)
+                    move_range('B',3,'B',final_row+1,0,2)
+                    move_range('U',3,'W',final_row+1,0,1)
+                    move_range('T',3,'T',final_row+1,0,1)
+                    move_range('O',3,'O',final_row+1,0,5)
+                    move_range('P',3,'P',final_row+1,0,-1)
+                    move_range('R',3,'R',final_row+1,0,-2)
 
 
 
@@ -229,7 +254,7 @@ for tenfile in all_input_files:
 
                 #Di kiem tra va lay du lieu cac cot ma lop, ma hoc sinh, ngay thang nam sinh
                 for fls in all_input_files:
-                    if fls.find('kqht') != -1:
+                    if fls.find('KQHT') != -1:
                         #Doc file 
                         idbook = pd.read_excel(fls,sheet_name = 'Sheet1')
                         
@@ -312,11 +337,11 @@ for tenfile in all_input_files:
             now = now.replace(' ','_')
 
             so_op_name = so_op_name + '_' + now + '.xlsx'
-            print(tenfile)
+            #print(tenfile)
 
             #Chuan bi file moi va nhap lieu vao file moi
             dst_so_dir = "output\\output_so\\" + so_op_name
-            print(dst_so_dir)
+            #print(dst_so_dir)
 
             writer_so = pd.ExcelWriter(dst_so_dir,engine = "openpyxl", mode = 'w')
             df_lop.to_excel(writer_so,sheet_name = 'Sheet1', startrow=7, startcol=0, header=False, index=False)
@@ -336,17 +361,17 @@ for tenfile in all_input_files:
 
             #Load du lieu diem
             khoilop = class_name[:2]
-            print(khoilop)
+            #print(khoilop)
             for mark_file_search in all_input_files:
                 if ((mark_file_search.find(tenmon_infiles[mon]) != -1) and (mark_file_search.find(str(khoilop)) != -1)):
                     #Doc file chua diem mon cua lop 
                     sheet_takepoint = tenmon_infiles[mon]+'_'+class_name.lower()
                     df_pts_class = pd.read_excel(mark_file_search,sheet_name=sheet_takepoint)
                     #print(df_pts_class)
-                    print(sheet_takepoint)
+                    #print(sheet_takepoint)
                     pts_of_class = df_pts_class.values.tolist()
                     pts_of_class = pts_of_class[4:-7]
-                    print(pts_of_class)
+                    #print(pts_of_class)
                     #Hoan thanh load du lieu xuong
 
 
@@ -396,7 +421,11 @@ for tenfile in all_input_files:
                     #print(pts_of_class[1][7])
                     #print(pts_of_class[row_data][7])
 
-                index_gk = pts_of_class[0].index('Giữa Kỳ')
+                print(pts_of_class)
+                for item in range(0,len(pts_of_class[0])):
+                    if pts_of_class[0][item] == 'ĐĐGgk':
+                        index_gk = item
+                #index_gk = pts_of_class[0].index('gk')
                 #print(index_gk)
                 input_col = 7
                 if check_point_1:
