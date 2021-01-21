@@ -201,12 +201,12 @@ for tenfile in all_input_files:
                 if lop.find('12') != -1:
                     move_range('C',3,'S',final_row+1,0,3)
                     move_range('B',3,'B',final_row+1,0,2)
-                    #move_range('T',3,'V',final_row+1,0,2)
-                    #move_range('S',3,'S',final_row+1,0,2)
-                    #move_range('O',3,'O',final_row+1,0,5)
-                    #move_range('P',3,'P',final_row+1,0,-1)
-                    #move_range('R',3,'R',final_row+1,0,-2)
-                if lop.find('11') !=1: 
+                    move_range('T',3,'V',final_row+1,0,2)
+                    move_range('S',3,'S',final_row+1,0,2)
+                    move_range('O',3,'O',final_row+1,0,5)
+                    move_range('P',3,'P',final_row+1,0,-1)
+                    move_range('R',3,'R',final_row+1,0,-2)
+                if lop.find('11') != -1:
                     move_range('C',3,'T',final_row+1,0,3)
                     move_range('B',3,'B',final_row+1,0,2)
                     move_range('U',3,'W',final_row+1,0,1)
@@ -323,8 +323,8 @@ for tenfile in all_input_files:
         #print(df_lop)
 
         #Tao list mon
-        tenmon_infiles = ['toan_hoc','tin_hoc','vat_ly','hoa_hoc','sinh_hoc','lich_su','dia_li','ngu_van','ngoai_ngu','gdcd','cong_nghe']
-        tenmon_view = ['TOÁN','TIN HỌC','VẬT LÝ','HÓA HỌC','SINH HỌC','LỊCH SỬ','ĐỊA LÍ','NGỮ VĂN','NGOẠI NGỮ','GIÁO DỤC CÔNG DÂN','CÔNG NGHỆ']
+        tenmon_infiles = ['toan_hoc','tin_hoc','vat_li','hoa_hoc','sinh_hoc','lich_su','dia_li','ngu_van','ngoai_ngu','gdcd','cong_nghe']
+        tenmon_view = ['TOÁN','TIN HỌC','VẬT LÍ','HÓA HỌC','SINH HỌC','LỊCH SỬ','ĐỊA LÍ','NGỮ VĂN','NGOẠI NGỮ','GIÁO DỤC CÔNG DÂN','CÔNG NGHỆ']
 
         for mon in range(0,len(tenmon_infiles)):
             #Tao file name
