@@ -24,7 +24,8 @@ from openpyxl.styles import Alignment,PatternFill
 import xlsxwriter
 import pyexcel
 import pyexcel_io
-
+import pyexcel_xlsx
+import pyexcel_xls
 
 
 
@@ -59,6 +60,7 @@ for item in all_input_files:
 #Tien hanh lay du lieu tu file tong quat de xu ly cho bo
 for tenfile in all_input_files:
     if tenfile.find("Tonghop") != -1: 
+        #book = xlrd.open_workbook('Sodiem_Tonghop_12A1.xls')
         book = xlrd.open_workbook(tenfile)
         for name in book.sheet_names():
             if name.find("Kết quả") != -1:
@@ -253,7 +255,7 @@ for tenfile in all_input_files:
                 __format_ws__(ws,cells_range)
 
                 #Di kiem tra va lay du lieu cac cot ma lop, ma hoc sinh, ngay thang nam sinh
-                for fls in all_input_files:
+                for fls in all_input_files: 
                     if fls.find('KQHT') != -1:
                         #Doc file 
                         idbook = pd.read_excel(fls,sheet_name = 'Sheet1')
@@ -265,10 +267,12 @@ for tenfile in all_input_files:
                         #if lop != idbook.loc[1][1]:
                         #    kq = False
                         #print(kq)
+                                               
 
                         if idbook.loc[1][1] == lop: 
                             #Xuly lay dataframe nay de duyet
                             idmf = idbook
+
 
                 #Da lay duoc du lieu dataframe vao dataframe ten idmf
                 #Chuyen dataframe nay sang list de de xuly voi openpyxl
@@ -536,7 +540,7 @@ for tenfile in all_input_files:
             new_dest_so = xls_dest[0] + '\\' + xls_dest[1] + '\\' + xls_dest[2]
             #print(new_dest_so)
             
-            pyexcel.save_book_as(file_name = dst_so_dir,dest_file_name = new_dest_so)
+            #pyexcel.save_book_as(file_name = dst_so_dir,dest_file_name = new_dest_so)
 
 
 
