@@ -34,6 +34,10 @@ import pyexcel_xls
 import datetime
 import shutil
 
+#Import win32 for xlsx to xls
+from win32com.client import Dispatch
+#import xlwings as xw
+
 
 
 
@@ -118,10 +122,46 @@ for tenfile in all_input_files:
                 #Xoa truoc 2 dong dau cua dataframe
                 df = df.iloc[2:]
 
+                #Đổi xếp loại
+                df = df.replace(to_replace = "HSG", value = "Giỏi")
+                df = df.replace(to_replace = "HSTT", value = "Tiên tiến")
+                print(df)
+
+
                 writer = pd.ExcelWriter(dst_dir,engine = "openpyxl", mode = 'w')
                 df.to_excel(writer,sheet_name = 'Sheet1', startrow=2, startcol=0, header=False, index=False)
-         
+
                 
+         
+                #try:
+                #    #print(df.iloc[:,17])
+                #    list_dh_output = list(df.iloc[:,17])
+                #    if ('HSTT' or 'HSG') in list_dh_output:
+                #        #print(list_dh_output)
+                #        list_dh_note = list()
+                #        for item in list_dh_output:
+                #            if item == "HSG":
+                #                list_dh_note.append("Giỏi")
+                #            if item == "HSTT":
+                #                list_dh_note.append("Tiên tiến")
+                #            if  (item != "HSG") and (item != "HSTT"):
+                #                list_dh_note.append(item)
+                #                print(item)
+                #        #print(list_dh_note)
+
+
+
+                #    #else:
+                #        #print("not require list type!!!")
+                #        #print(list_dh_output)
+                #        #print(type(list_dh_output))
+                #except:
+                #    print('Error!!')
+
+
+
+
+
                 writer.save()
                 
                 #Xu ly tieu de bang openpyxl
@@ -539,7 +579,31 @@ for tenfile in all_input_files:
 
             new_dest_so = xls_dest[0] + '\\' + xls_dest[1] + '\\' + xls_dest[2]
             #print(new_dest_so)
-            
+
+
+
+
+
+
+
+
+
+
+
+
+
+            xl = Dispatch('Excel.Application')
+            new_dst_so_dir = "D:\\CodingProjects\\SumMarks_ThayLu\\SoftVer2_SumarizeMarks\\" + dst_so_dir
+            new_new_dest_so = "D:\\CodingProjects\\SumMarks_ThayLu\\SoftVer2_SumarizeMarks\\" + new_dest_so
+            print(new_dst_so_dir)
+            wb = xl.Workbooks.Open(new_dst_so_dir)
+            wb.CheckCompatibility = False
+            wb.DoNotPromptForConvert = False
+            wb.SaveAs(new_new_dest_so,FileFormat=56)
+            wb.Close()
+            xl.Quit()
+
+
             #pyexcel.save_book_as(file_name = dst_so_dir,dest_file_name = new_dest_so)
 
 
