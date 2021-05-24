@@ -67,7 +67,7 @@ for tenfile in all_input_files:
         #book = xlrd.open_workbook('Sodiem_Tonghop_12A1.xls')
         book = xlrd.open_workbook(tenfile)
         for name in book.sheet_names():
-            if name.find("Kết quả") != -1:
+            if name.find("Kết quả HK") != -1:
                 #Kiem tra ten
                 #print(book.sheet_by_name(name))
                 
